@@ -11,7 +11,9 @@ module.exports = {
   },
   devtool: 'eval-source-map',
   devServer: {
-    contentBase: './dist'
+    contentBase: './dist',
+    host: "localhost",
+    port: 8081
   },
   plugins: [
     new HtmlWebpackPlugin({
