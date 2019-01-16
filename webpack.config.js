@@ -1,6 +1,5 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
@@ -21,8 +20,7 @@ module.exports = {
       template: './src/index.html',
       inject: 'body'
     }),
-    new CleanWebpackPlugin(['dist']),
-    new UglifyJsPlugin({ sourceMap: true })
+    new CleanWebpackPlugin(['dist'])
   ],
   module: {
     rules: [
@@ -35,16 +33,14 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        exclude: [/node_modules/, /spec/],
-        loader: "eslint-loader"
+        exclude: [/node_modules/, /spec/, /dist/],
+        loader: "eslint-loader",
+        enforce: "pre"
       },
       {
         test: /\.js$/,
         exclude: [/node_modules/, /spec/],
-        loader: "babel-loader",
-        options: {
-          presets: ["@babel/preset-env"]
-        }
+        loader: "babel-loader"
       }
     ]
   }
